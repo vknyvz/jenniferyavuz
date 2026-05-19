@@ -107,7 +107,7 @@
       const indexLoading = document.getElementById('index-loading');
 
       try {
-        const pdf = await pdfjsLib.getDocument('jyavuz-design-portfolio-ai.pdf').promise;
+        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-ai.pdf').promise;
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
