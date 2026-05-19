@@ -1,0 +1,35 @@
+name: Deploy jenniferyavuz
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy jenniferyavuz.com
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.LIGHTSAIL_HOST }}
+        username: ${{ secrets.LIGHTSAIL_USER }}
+        key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+        script: |
+          set -euo pipefail
+          cd /home/ec2-user/vkn-mainframe
+          git pull origin main
+
+          cd /home/ec2-user/apps/jenniferyavuz
+          git pull origin main
+
+          cd /home/ec2-user/vkn-mainframe
+
+          docker compose -f docker-compose.multi.yml --profile jenniferyavuz down
+          docker container prune -f
+          docker builder prune -a -f
+          docker compose -f docker-compose.multi.yml --profile jenniferyavuz build --no-cache jenniferyavuz-web
+          docker compose -f docker-compose.multi.yml --profile jenniferyavuz up -d jenniferyavuz-web
+
+          docker system prune -f
