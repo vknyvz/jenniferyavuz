@@ -1,8 +1,8 @@
 FROM nginx:1.27-alpine
 
 COPY index.html /usr/share/nginx/html/
-COPY jenn-pic.jpeg /usr/share/nginx/html/
-COPY Jennifer_Yavuz_Design_Portfolio.pdf /usr/share/nginx/html/
+COPY robots.txt /usr/share/nginx/html/
+COPY aid /usr/share/nginx/html/aid/
 
 EXPOSE 80
 
