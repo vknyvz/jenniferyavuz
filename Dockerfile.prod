@@ -2,6 +2,9 @@ FROM nginx:1.27-alpine
 
 COPY index.html /usr/share/nginx/html/
 COPY robots.txt /usr/share/nginx/html/
+COPY og-image.jpg /usr/share/nginx/html/
+COPY favicon.png /usr/share/nginx/html/
+COPY apple-touch-icon.png /usr/share/nginx/html/
 COPY aid /usr/share/nginx/html/aid/
 
 EXPOSE 80
