@@ -5,6 +5,7 @@ COPY robots.txt /usr/share/nginx/html/
 COPY og-image.jpg /usr/share/nginx/html/
 COPY favicon.png /usr/share/nginx/html/
 COPY apple-touch-icon.png /usr/share/nginx/html/
+COPY jenn-image.jpeg /usr/share/nginx/html/
 COPY aid /usr/share/nginx/html/aid/
 
 EXPOSE 80
