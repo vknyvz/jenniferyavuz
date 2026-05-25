@@ -107,7 +107,7 @@
       const indexLoading = document.getElementById('index-loading');
 
       try {
-        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-ai.pdf').promise;
+        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-ai-1779686960.pdf').promise;
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
@@ -131,21 +131,28 @@
 
         // Populate the full index at once, only after all pages are ready.
         const projects = [
-          { name: 'Hamptons Residence',                        pages: [1, 2, 3, 4] },
-          { name: 'Eden Roc Guestrooms',                       pages: [5, 6, 7] },
-          { name: 'The Douglas Hotel',                         pages: [8, 9, 10, 11] },
-          { name: 'Intérieurs Showroom',                       pages: [12, 13, 14] },
-          { name: 'Modern Farmhouse',                          pages: [15, 16, 17, 18] },
+          { name: 'Hamptons Residence',   pages: [1, 2, 3, 4] },
+          { name: 'Eden Roc Guest Rooms', pages: [5, 6, 7] },
+          { name: 'Tribeca Loft',         pages: [8, 9, 10, 11, 12, 13] },
+          { name: 'The Douglas Hotel',    pages: [14, 15, 16, 17] },
+          { name: 'Interieurs Showroom',  pages: [18, 19, 20] },
+          { name: 'Modern Farmhouse',     pages: [21, 22, 23, 24] }
         ];
 
         const frag = document.createDocumentFragment();
         projects.forEach(p => {
           const block = document.createElement('div');
-          block.innerHTML = `
-            <a href="#page-${p.pages[0]}" class="block group">
-              <h3 class="text-sm text-ink group-hover:text-[#948d83] transition-colors leading-snug [-webkit-text-stroke:0.5px_currentColor]">${p.name}</h3>
-            </a>
-          `;
+          if (p.pages.length) {
+            block.innerHTML = `
+              <a href="#page-${p.pages[0]}" class="block group">
+                <h3 class="text-sm text-ink group-hover:text-[#948d83] transition-colors leading-snug [-webkit-text-stroke:0.5px_currentColor]">${p.name}</h3>
+              </a>
+            `;
+          } else {
+            block.innerHTML = `
+              <h3 class="text-sm text-subtle leading-snug [-webkit-text-stroke:0.5px_currentColor]">${p.name}</h3>
+            `;
+          }
           frag.appendChild(block);
         });
         indexList.appendChild(frag);

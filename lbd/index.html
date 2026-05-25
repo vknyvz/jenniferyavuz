@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>Jennifer Yavuz — Portfolio -- /lbd</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Marcellus"', 'Georgia', 'serif'],
+          },
+          colors: {
+            ink:    '#111111',
+            muted:  '#555b63',
+            subtle: '#8b9097',
+            accent: '#a8864a',
+            rule:   '#d9d4c9',
+            cream:  '#f6f2ea',
+          },
+          keyframes: {
+            'index-sweep': {
+              '0%':   { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(400%)' },
+            },
+          },
+          animation: {
+            'index-sweep': 'index-sweep 1.6s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="font-sans text-ink antialiased bg-white">
+
+  <div class="min-h-screen lg:grid lg:grid-cols-[minmax(13rem,19rem)_1fr]">
+
+    <!-- Sidebar -->
+    <aside class="bg-cream lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto">
+      <div class="flex flex-col gap-8 px-3 py-5 lg:px-4 lg:py-6 lg:min-h-screen">
+
+        <header>
+          <h1 class="text-xl lg:text-2xl font-bold tracking-[.06em] leading-[1.05] [-webkit-text-stroke:0.6px_currentColor]">
+            JENNIFER YAVUZ
+          </h1>
+          <p class="text-[#948d83] text-sm mt-2 [-webkit-text-stroke:0.7px_currentColor]">
+            Design Manager · Interior Designer
+          </p>
+        </header>
+
+        <nav id="index-nav">
+          <h2 class="text-base font-bold uppercase tracking-[.18em] text-accent border-b border-rule pb-1.5 mb-3">
+            Index
+          </h2>
+          <div id="page-index" class="space-y-4"></div>
+          <div id="index-loading" class="py-3 space-y-2">
+            <div class="relative h-px w-3/4 mx-auto bg-rule/60 overflow-hidden">
+              <span class="absolute inset-y-0 left-0 w-1/4 bg-[#948d83] animate-index-sweep"></span>
+            </div>
+            <p class="text-sm text-[#948d83] italic text-center tracking-wide">portfolio is loading&hellip;</p>
+          </div>
+        </nav>
+
+        <section>
+          <h2 class="text-base font-bold uppercase tracking-[.18em] text-accent border-b border-rule pb-1.5 mb-3">
+            Contact
+          </h2>
+          <div class="text-sm text-ink leading-relaxed space-y-0.5">
+            <p><a href="tel:+19175692789" target="_blank" class="text-ink hover:text-[#948d83] transition-colors">917-569-2789</a></p>
+            <p>Thousand Oaks, CA</p>
+            <p><a href="mailto:jenniferyavuz@gmail.com" target="_blank" class="text-ink hover:text-[#948d83] transition-colors break-all">jenniferyavuz@gmail.com</a></p>
+          </div>
+        </section>
+
+        <p class="hidden lg:block mt-auto pt-6 text-xs text-subtle">
+          &copy; 2026 Jennifer Yavuz
+        </p>
+
+      </div>
+    </aside>
+
+    <!-- Main / portfolio pages -->
+    <main>
+      <div id="pages" class="flex flex-col"></div>
+    </main>
+
+  </div>
+
+  <script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    (async () => {
+      const pagesContainer = document.getElementById('pages');
+      const indexList = document.getElementById('page-index');
+      const indexLoading = document.getElementById('index-loading');
+
+      try {
+        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-lbd.pdf').promise;
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+          const section = document.createElement('section');
+          section.id = `page-${i}`;
+          section.className = 'w-full scroll-mt-8';
+
+          const img = document.createElement('img');
+          img.src = canvas.toDataURL('image/jpeg', 0.85);
+          img.alt = `Page ${i}`;
+          img.className = 'block w-full';
+          section.appendChild(img);
+          pagesContainer.appendChild(section);
+        }
+
+        // Populate the full index at once, only after all pages are ready.
+        const projects = [
+          { name: 'Hamptons Residence',   pages: [1, 2, 3, 4] },
+          { name: 'Eden Roc Guest Rooms', pages: [5, 6, 7] },
+          { name: 'Tribeca Loft',         pages: [8, 9, 10, 11, 12, 13] },
+          { name: 'The Douglas Hotel',    pages: [14, 15, 16, 17] },
+          { name: 'Interieurs Showroom',  pages: [18, 19, 20] },
+          { name: 'Modern Farmhouse',     pages: [21, 22, 23, 24] }
+        ];
+
+        const frag = document.createDocumentFragment();
+        projects.forEach(p => {
+          const block = document.createElement('div');
+          block.innerHTML = `
+            <a href="#page-${p.pages[0]}" class="block group">
+              <h3 class="text-sm text-ink group-hover:text-[#948d83] transition-colors leading-snug [-webkit-text-stroke:0.5px_currentColor]">${p.name}</h3>
+            </a>
+          `;
+          frag.appendChild(block);
+        });
+        indexList.appendChild(frag);
+        indexLoading.remove();
+      } catch (err) {
+        console.error(err);
+        indexLoading.remove();
+      }
+    })();
+  </script>
+</body>
+</html>
