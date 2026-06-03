@@ -8,6 +8,7 @@ COPY apple-touch-icon.png /usr/share/nginx/html/
 COPY jenn-image.jpeg /usr/share/nginx/html/
 COPY aid /usr/share/nginx/html/aid/
 COPY lbd /usr/share/nginx/html/lbd/
+COPY fc /usr/share/nginx/html/fc/
 
 EXPOSE 80
 

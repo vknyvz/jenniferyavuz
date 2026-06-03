@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /aid/
 Disallow: /lbd/
+Disallow: /fc/
