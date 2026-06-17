@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
-  <title>Jennifer Yavuz — Portfolio -- /fc</title>
+  <title>Jennifer Yavuz — Portfolio -- /ab</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,7 +107,7 @@
       const indexLoading = document.getElementById('index-loading');
 
       try {
-        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-fc-1781736089.pdf').promise;
+        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-ab-1781736089.pdf').promise;
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
@@ -133,10 +133,10 @@
         const projects = [
           { name: "Hamptons Home",          pages: [1, 2] },
           { name: 'Soho Residence',         pages: [3, 4] },
-          { name: 'Douglas Hotel',          pages: [5, 6, 7, 8] },
-          { name: 'Eden Roc Guestrooms',    pages: [9, 10, 11] },
-          { name: 'Contemporary Brookview', pages: [12, 13] },
-          { name: 'Modern Farmhouse',       pages: [14, 15, 16, 17] }
+          { name: 'Douglas Hotel',          pages: [5, 6, 7] },
+          { name: 'Eden Roc Guestroom',     pages: [8, 9, 10] },
+          { name: 'Contemporary Brookview', pages: [11, 12] },
+          { name: 'Modern Farmhouse',       pages: [13, 14, 15, 16] }
         ];
 
         const frag = document.createDocumentFragment();

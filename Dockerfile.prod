@@ -9,6 +9,7 @@ COPY jenn-image.jpeg /usr/share/nginx/html/
 COPY aid /usr/share/nginx/html/aid/
 COPY lbd /usr/share/nginx/html/lbd/
 COPY fc /usr/share/nginx/html/fc/
+COPY ab /usr/share/nginx/html/ab/
 
 EXPOSE 80
 
