@@ -107,7 +107,7 @@
       const indexLoading = document.getElementById('index-loading');
 
       try {
-        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-fc-1781736089.pdf').promise;
+        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-fc-1781827142.pdf').promise;
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
@@ -132,11 +132,10 @@
         // Populate the full index at once, only after all pages are ready.
         const projects = [
           { name: "Hamptons Home",          pages: [1, 2] },
-          { name: 'Soho Residence',         pages: [3, 4] },
-          { name: 'Douglas Hotel',          pages: [5, 6, 7, 8] },
-          { name: 'Eden Roc Guestrooms',    pages: [9, 10, 11] },
-          { name: 'Contemporary Brookview', pages: [12, 13] },
-          { name: 'Modern Farmhouse',       pages: [14, 15, 16, 17] }
+          { name: 'Contemporary Brookview', pages: [3, 4] },
+          { name: 'Modern Farmhouse',       pages: [5, 6, 7, 8] },
+          { name: 'Soho Residence',         pages: [9, 10] },
+          { name: 'Calarosa Ranch',         pages: [11, 12] }
         ];
 
         const frag = document.createDocumentFragment();
