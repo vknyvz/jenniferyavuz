@@ -107,7 +107,7 @@
       const indexLoading = document.getElementById('index-loading');
 
       try {
-        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-ab-1781827142.pdf').promise;
+        const pdf = await pdfjsLib.getDocument('https://jenn-portfolio.s3.us-east-1.amazonaws.com/jyavuz-design-portfolio-ab-1782813192.pdf').promise;
 
         for (let i = 1; i <= pdf.numPages; i++) {
           const page = await pdf.getPage(i);
@@ -131,13 +131,16 @@
 
         // Populate the full index at once, only after all pages are ready.
         const projects = [
-          { name: "Hamptons Home",          pages: [1, 2] },
-          { name: 'Soho Residence',         pages: [3, 4] },
-          { name: 'The Douglas Hotel',      pages: [5, 6, 7] },
-          { name: 'Eden Roc Guestrooms',    pages: [8, 9, 10] },
-          { name: 'Contemporary Brookview', pages: [11, 12] },
-          { name: 'Calarosa Ranch',         pages: [13, 14] },
-          { name: 'Modern Farmhouse',       pages: [15, 16, 17, 18] }
+          { name: 'Intérieurs Showroom',     pages: [1, 2, 3, 4] },
+          { name: 'Hamptons Home',           pages: [6, 7, 8, 9] },
+          { name: 'Tribeca Loft',            pages: [11, 12, 13, 14, 15, 16] },
+          { name: 'Condo at 100 11th Ave',   pages: [18, 19, 20, 21, 22] },
+          { name: 'The Douglas Hotel',       pages: [24, 25, 26, 27] },
+          { name: 'Eden Roc Guestrooms',     pages: [29, 30, 31] },
+          { name: 'Contemporary Brookview',  pages: [32, 33, 34] },
+          { name: 'Transitional SoCal',      pages: [36, 37] },
+          { name: 'Modern Farmhouse',        pages: [39, 40, 41, 42] },
+          { name: 'Calarosa Hilltop',        pages: [43, 44, 45] }
         ];
 
         const frag = document.createDocumentFragment();
